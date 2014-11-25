@@ -9,7 +9,7 @@
       <id name="id" type="int">
          <generator class="increment"/>
       </id>
-
+<version name="version" type="long"></version>
       <property name="name" type="string"/>
       <property name="description" type="string"/>
       <property name="price" type="double"/>
