@@ -7,6 +7,7 @@ public class Product
     private String name;
     private String description;
     private double price;
+    private long version;
     
     public Product()
     {
@@ -63,4 +64,12 @@ public class Product
     {
         this.price = price;
     }
+
+	public long getVersion() {
+		return version;
+	}
+
+	public void setVersion(long version) {
+		this.version = version;
+	}
 }
