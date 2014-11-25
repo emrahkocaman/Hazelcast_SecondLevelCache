@@ -1,5 +1,6 @@
 package com.hazelcast;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 public class Supplier
@@ -7,6 +8,7 @@ public class Supplier
     private int id;
     private String name;
     private List products = new ArrayList();
+    private long version;
     
     public int getId()
     {
@@ -32,4 +34,10 @@ public class Supplier
     {
         this.products = products;
     }
+	public long getVersion() {
+		return version;
+	}
+	public void setVersion(long version) {
+		this.version = version;
+	}
 }
