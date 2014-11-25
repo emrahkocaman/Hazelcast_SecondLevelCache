@@ -16,12 +16,13 @@ public class Main {
         stats.setStatisticsEnabled(true);        
         session.clear();
         Supplier supplier = (Supplier) session.load(Supplier.class,
-                    new Integer(1));
+                    new Integer(3));
         System.out.println(supplier.getName());
   
+        //clear collection and update entity
         issueRelated(session, supplier);
             
-        displayStatistics(sf, stats);
+   //     displayStatistics(sf, stats);
        
 //        evict2ndLevelCache(sf);
 
@@ -30,20 +31,20 @@ public class Main {
     }
 
 	private static void issueRelated(Session session, Supplier supplier) {
-		session.beginTransaction();
 		supplier.getProducts().clear();
-		supplier.setName("Supplier5");
-		
+		session.beginTransaction();
+		supplier.setName("Supplier10");		
 		session.getTransaction().commit();
+		
 	}
 
 	private static void initialize() {
 		HibernateUtil.droptable("drop table Supplier");
         HibernateUtil.droptable("drop table Product");
         HibernateUtil
-                .setup("create table Supplier ( id int, name VARCHAR(20))");
+                .setup("create table Supplier ( id int, name VARCHAR(20), version BIGINT)");
         HibernateUtil
-                .setup("create table Product ( id int, name VARCHAR(20), description VARCHAR(40), price double,supplierId int)");
+                .setup("create table Product ( id int, name VARCHAR(20), description VARCHAR(40), price double,supplierId int,version BIGINT)");
 
         prepareTestData();
 
