@@ -7,7 +7,7 @@ public class Supplier
 {
     private int id;
     private String name;
-    private List products = new ArrayList();
+    private List<Product> products = new ArrayList<Product>();
     private long version;
     
     public int getId()
@@ -26,7 +26,7 @@ public class Supplier
     {
         this.name = name;
     }
-    public List getProducts()
+    public List<Product> getProducts()
     {
         return products;
     }

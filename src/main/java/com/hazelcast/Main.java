@@ -1,6 +1,7 @@
 package com.hazelcast;
 import java.util.*;
 
+import com.hazelcast.core.Hazelcast;
 import org.hibernate.*;
 import org.hibernate.stat.Statistics;
 import org.hibernate.metadata.ClassMetadata;
@@ -9,6 +10,7 @@ public class Main {
 
     public static void main(String[] args) {
 
+        Hazelcast.newHazelcastInstance();
         initialize();
         Session session = HibernateUtil.currentSession();
         SessionFactory sf = session.getSessionFactory();       
@@ -21,6 +23,10 @@ public class Main {
   
         //clear collection and update entity
         issueRelated(session, supplier);
+
+        Supplier supplier2 = (Supplier) session.load(Supplier.class,
+                new Integer(3));
+        System.out.println("Updated Version : " + supplier2.getProducts().get(0).getVersion());
             
    //     displayStatistics(sf, stats);
        
@@ -31,9 +37,11 @@ public class Main {
     }
 
 	private static void issueRelated(Session session, Supplier supplier) {
-		supplier.getProducts().clear();
+		//supplier.getProducts().clear();
 		session.beginTransaction();
-		supplier.setName("Supplier10");		
+		supplier.setName("Supplier10");
+        Product product = supplier.getProducts().get(0);
+        product.setPrice(123123);
 		session.getTransaction().commit();
 		
 	}
